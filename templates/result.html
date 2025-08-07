@@ -40,12 +40,31 @@
                 <div class="text-center mb-3">
                     <h3>Analysis Result</h3>
                 </div>
-                <h5 class="mb-3">File: <span class="text-primary">{{ filename }}</span></h5>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item"><strong>Transcription:</strong> <span class="text-dark">{{ result.transcription }}</span></li>
-                    <li class="list-group-item"><strong>Frame Rate:</strong> <span class="text-dark">{{ result.frame_rate }}</span></li>
-                    <li class="list-group-item"><strong>Channels:</strong> <span class="text-dark">{{ result.channels }}</span></li>
-                </ul>
+                {% if issue_counts %}
+                    <h5 class="mb-3">Issue Summary</h5>
+                    <ul class="list-group mb-3">
+                        {% for issue, count in issue_counts.items() %}
+                            <li class="list-group-item"><strong>{{ issue }}:</strong> <span class="text-primary">{{ count }} time{{ 's' if count > 1 else '' }}</span></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if file_results %}
+                    <h5 class="mb-3">File Details</h5>
+                    {% for file in file_results %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title">File: <span class="text-primary">{{ file.filename }}</span></h6>
+                                <ul class="list-group mb-2">
+                                    <li class="list-group-item"><strong>Transcription:</strong> <span class="text-dark">{{ file.result.transcription }}</span></li>
+                                    <li class="list-group-item"><strong>Frame Rate:</strong> <span class="text-dark">{{ file.result.frame_rate }}</span></li>
+                                    <li class="list-group-item"><strong>Channels:</strong> <span class="text-dark">{{ file.result.channels }}</span></li>
+                                    <li class="list-group-item"><strong>Issue Category:</strong> <span class="text-success">{{ file.issue }}</span></li>
+                                    <li class="list-group-item"><strong>Suggestion:</strong> <span class="text-info">{{ file.suggestion }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="d-flex justify-content-between">
                     <a href="/upload" class="btn btn-primary">Analyze Another</a>
                     <a href="/logout" class="btn btn-outline-secondary">Logout</a>
