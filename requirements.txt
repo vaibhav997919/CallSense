@@ -1,0 +1,8 @@
+SpeechRecognition
+pydub
+spacy
+nltk
+seaborn
+matplotlib
+pandas
+Flask
