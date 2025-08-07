@@ -42,8 +42,8 @@
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="audiofile" class="form-label">Select audio file</label>
-                        <input type="file" class="form-control" id="audiofile" name="audiofile" accept="audio/*" required>
+                        <label for="audiofile" class="form-label">Select audio files (.wav, multiple allowed)</label>
+                        <input type="file" class="form-control" id="audiofile" name="audiofile" accept="audio/wav" multiple required>
                     </div>
                     <button type="submit" class="btn btn-success w-100">Upload & Analyze</button>
                 </form>
